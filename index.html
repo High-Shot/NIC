@@ -133,9 +133,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-si
 .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:24px;box-shadow:var(--shadow);}
 .pc{background:var(--card);padding:12px 14px;position:relative;transition:background 0.15s;}
 .pc:hover{background:var(--card-hover);}
-.pc.flagged{background:var(--red-bg);}.pc.warned{background:var(--amber-bg);}
-.pc-bar{position:absolute;top:0;left:0;right:0;height:2px;}
-.pc-bar.crit{background:var(--red);}.pc-bar.warn{background:var(--amber);}.pc-bar.ok{background:var(--green);}
+.pc-bar{position:absolute;top:0;left:0;right:0;height:2px;background:var(--border2);}
 .pc-name{font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--ink);margin-bottom:8px;margin-top:4px;letter-spacing:-0.1px;}
 .pc-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;}
 .pcl{font-size:9px;color:var(--muted);font-family:var(--font-mono);font-weight:500;}
@@ -211,8 +209,10 @@ const fN = n => n>=1000?(n/1000).toFixed(1)+'K':String(n);
 
 function getCur(mk){return MKT_META[mk]?.currency||'$';}
 
+const EU_MKTS=['CC_FR','CC_DE','CC_IT','CC_ES','CC_NL'];
 function filterMkts(ks){
   if(brandFilter==='CC') return ks.filter(k=>k.startsWith('CC_'));
+  if(brandFilter==='EU') return ks.filter(k=>EU_MKTS.indexOf(k)!==-1);
   return ks;
 }
 
@@ -327,7 +327,7 @@ function renderTrendBar(){
   let pw=null;
   if(cmpSel&&cmpSel.value==='prev'&&wIdx<WEEKS.length-1) pw=getMktData(WEEKS[wIdx+1],mktKey).acct;
   else if(cmpSel&&cmpSel.value!=='prev') pw=getMktData(WEEKS[parseInt(cmpSel.value)],mktKey).acct;
-  const cur=mktKey==='GLOBAL'?'$':getCur(mktKey);
+  const cur=mktKey==='GLOBAL'?(brandFilter==='EU'?'\u20ac':'$'):getCur(mktKey);
   document.getElementById('trendBar').innerHTML=[
     ['Revenue',fC(a.revenue,cur),delta(a.revenue,pw?.revenue,false)],
     ['Units',fN(a.units),delta(a.units,pw?.units,false)],
@@ -342,7 +342,7 @@ function renderTrendBar(){
 
 function renderKPIs(){
   const a=getMktData(getActiveWeek(),mktKey).acct;
-  const cur=mktKey==='GLOBAL'?'$':getCur(mktKey);
+  const cur=mktKey==='GLOBAL'?(brandFilter==='EU'?'\u20ac':'$'):getCur(mktKey);
   const ts=a.tacos>15?'crit':a.tacos>10?'warn':'ok';
   const as=a.acos>30?'crit':'ok';
   document.getElementById('kpiRow').innerHTML=[
@@ -421,10 +421,10 @@ function renderMktView(){
       const vs=p.status||'ok';
       const effVal=p.tacos;const effTarget=10;const effMax=50;
       const ep=Math.min(100,(effVal/effMax)*100);
-      const ec=vs==='crit'?'var(--red)':vs==='warn'?'var(--amber)':'var(--green)';
+      const ec='var(--accent)';
       const tp=(effTarget/effMax)*100;
-      html+=`<div class="pc ${vs==='crit'?'flagged':vs==='warn'?'warned':''}">
-        <div class="pc-bar ${vs}"></div>
+      html+=`<div class="pc">
+        <div class="pc-bar"></div>
         <div class="pc-name">${p.name}</div>
         <div class="pc-row"><span class="pcl">Revenue</span><span class="pcv">${fCF(p.revenue,cur)}</span></div>
         <div class="pc-row"><span class="pcl">Units</span><span class="pcv">${fN(p.units)}</span></div>
@@ -437,7 +437,7 @@ function renderMktView(){
         ${p.subcategory?`<div class="pc-row"><span class="pcl">${p.subcategory}</span><span class="pcv" style="color:var(--accent)">#${p.subcategoryBSR||'\u2014'}</span></div>`:`<div class="pc-row"><span class="pcl">Sub BSR</span><span class="pcv" style="color:var(--accent)">\u2014</span></div>`}
         <div class="pc-row"><span class="pcl">Category BSR</span><span class="pcv">${p.categoryBSR||p.bsr||'\u2014'}</span></div>
         <div class="eff-wrap">
-          <div class="eff-lbl"><span class="pcl">TACoS</span><span class="pcv ${vs}">${fP(effVal)} <span style="color:var(--dim);font-size:8px">/ ${effTarget}%</span></span></div>
+          <div class="eff-lbl"><span class="pcl">TACoS</span><span class="pcv">${fP(effVal)} <span style="color:var(--dim);font-size:8px">/ ${effTarget}%</span></span></div>
           <div class="eff-track"><div class="eff-fill" data-w="${ep}" style="background:${ec}"></div><div class="eff-thresh" style="left:${tp}%"></div></div>
         </div>
       </div>`;
@@ -522,7 +522,7 @@ function switchMkt(mk){mktKey=mk;render();}
 function switchWeek(i){wIdx=parseInt(i);render();}
 function weekPrev(){if(wIdx<WEEKS.length-1){wIdx++;render();}}
 function weekNext(){if(wIdx>0){wIdx--;render();}}
-function toggleBrand(){brandFilter=brandFilter==='ALL'?'CC':'ALL';render();}
+function setBrand(b){brandFilter=b;render();}
 function toggleView(){viewMode=viewMode==='WEEKLY'?'MTD':'WEEKLY';render();}
 
 function renderFilterBar(){
@@ -534,8 +534,9 @@ function renderFilterBar(){
       <button class="filter-btn ${viewMode==='MTD'?'active':''}" onclick="toggleView()">MTD</button>
     </div>
     <div class="filter-group"><span class="filter-label">Brands</span>
-      <button class="filter-btn ${brandFilter==='ALL'?'active':''}" onclick="toggleBrand()">ALL BRANDS</button>
-      <button class="filter-btn ${brandFilter==='CC'?'active':''}" onclick="toggleBrand()">CERAMICS ONLY</button>
+      <button class="filter-btn ${brandFilter==='ALL'?'active':''}" onclick="setBrand('ALL')">ALL BRANDS</button>
+      <button class="filter-btn ${brandFilter==='CC'?'active':''}" onclick="setBrand('CC')">CERAMICS ONLY</button>
+      <button class="filter-btn ${brandFilter==='EU'?'active':''}" onclick="setBrand('EU')">EU</button>
     </div>`;
 }
 
