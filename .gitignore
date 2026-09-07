@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Secrets / credentials — never commit Google service-account keys
+credentials.json
+service-account.json
+service_account.json
+*-credentials.json
+*_credentials.json
+client_secret*.json
+.env
+.env.*
+
+# Local build artifacts produced by NIC/scripts/build_dashboard.py
+# (the live dashboard bakes its data into index.html; data.json is only a
+# byproduct of the orphaned script and should not be committed)
+data.json
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
