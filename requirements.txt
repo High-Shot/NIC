@@ -1,0 +1,6 @@
+# Dependencies for NIC/scripts/build_dashboard.py (orphaned reference script).
+# These are the only third-party imports it uses:
+#   import gspread
+#   from google.oauth2.service_account import Credentials  (provided by google-auth)
+gspread==6.1.2
+google-auth==2.35.0
