@@ -1,0 +1,7 @@
+inbox/*.xlsx
+inbox/*.csv
+inbox/processed/*
+!inbox/.gitkeep
+!inbox/processed/.gitkeep
+__pycache__/
+.DS_Store
