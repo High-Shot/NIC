@@ -43,12 +43,11 @@ category = `Category`, category_rank = `LatestRank`, subcategory and subcategory
 
 Prior-week refresh: repeat 1a and 1b for WEEK minus 7 days into `data/raw/<prior WEEK>/` (overwrite the two files). Skip 1c.
 
-## 2. Helium10: Legacy, Prismatic, SA, MX
+## 2. Helium10: Legacy, Prismatic, SA (MX archived 2026-09-09, skip it)
 `mcp__Helium10__get_account_profit_and_loss_summary_series` and `get_product_profit_and_loss_summary_series` with `current_date_from: START, current_date_to: END, granularity: "week"`; the single bucket key is START.
 - CL_US: `seller_ids: ["A1KUYEQ8RRQVVI"], marketplace: ["US"]`, products `product_level: "asin", page_size: 10, sort_by: "sales"` (top 10 by revenue, that is the product block rule).
 - PP_US: `seller_ids: ["A21D21T8B6U09C"], marketplace: ["US"]`, same product call.
 - CC_SA: `seller_ids: ["A3BMUMIXNXIR6G"], marketplace: ["SA"], currency: "SAR"`, products `page_size: 20`.
-- CC_MX: `seller_ids: ["AOXMQPMOL1F1Y"], marketplace: ["MX"], currency: "MXN"`, account call only unless it shows sales.
 Write `data/raw/$WEEK/h10_<TAB>.csv`:
 ```
 tab,asin,name,sales,gross_revenue,units,sessions,ad_cost,ads_acos
@@ -58,7 +57,7 @@ tab,asin,name,sales,gross_revenue,units,sessions,ad_cost,ads_acos
 Short name: strip "CERAKOTE"/"PRISMATIC POWDERS", keep colour/size/code, under 45 chars. ad_cost as a positive number.
 
 ## 3. NTB (until the Ads API is connected)
-If `inbox/*.xlsx` or `inbox/*.csv` exist (the Reports Beta master report, daily rows, last 30 days): `python3 scripts/ingest_ntb.py $WEEK inbox/<file>` then move the file to `inbox/processed/`. If the Gmail search `from:amazon subject:"report" newer_than:3d has:attachment` finds the scheduled report attachment, save it to `inbox/` first (`mcp__Gmail__get_message` for the attachment). No file: continue, the week is flagged "NTB not loaded".
+If `inbox/*.xlsx` or `inbox/*.csv` exist (the Reports Beta master report, daily rows, last 30 days, all advertiser accounts): `python3 scripts/ingest_ntb.py $WEEK inbox/<file>` and again for the prior WEEK (the 30-day window covers both), then move the file to `inbox/processed/`. Check `data/raw/$WEEK/ntb_spend_check.csv` against the Scale Insights and Helium10 spend totals: they match to the cent when the export is complete; normalize.py flags any tab under 95% coverage (known: CC_UK at 65%, campaigns missing from the export). If the Gmail search `from:amazon subject:"report" newer_than:3d has:attachment` finds the scheduled report attachment, save it to `inbox/` first (`mcp__Gmail__get_message` for the attachment). No file: continue, the week is flagged "NTB not loaded".
 
 ## 4. Normalize, build, QA
 ```

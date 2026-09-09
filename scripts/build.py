@@ -35,7 +35,12 @@ def main():
     meta = {'GLOBAL': {'name': 'Global (All Markets)', 'currency': '', 'flag': ''}}
     for a in ACCOUNTS:
         meta[a['tab']] = {'name': a['name'], 'currency': a['currency'], 'flag': a['market'], 'label': a['label'], 'code': a['code']}
-    keys = ['GLOBAL'] + [a['tab'] for a in ACCOUNTS]
+    # archived tabs (config/accounts.json "archived": date) stay in data/weeks and MKT_META but leave the nav and GLOBAL
+    keys = ['GLOBAL'] + [a['tab'] for a in ACCOUNTS if not a.get('archived')]
+    archived = {a['tab'] for a in ACCOUNTS if a.get('archived')}
+    for w in weeks:
+        for t in archived:
+            w['markets'].pop(t, None)
     tpl = open(os.path.join(ROOT, 'template.html'), encoding='utf-8').read()
     fx = {k: v for k, v in FX.items() if not k.startswith('_')}
     html = tpl.replace('/*__MKT_META__*/', js(meta)).replace('/*__MKT_KEYS__*/', js(keys)).replace('/*__FX__*/', js(fx)).replace('/*__WEEKS__*/', js(weeks))

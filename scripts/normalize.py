@@ -23,7 +23,7 @@ PRODUCTS = DM['products']
 A2P = DM['asin_to_product']
 KPI = DM['kpi']
 ACC = {a['tab']: a for a in ACCOUNTS}
-TABS = [a['tab'] for a in ACCOUNTS]
+TABS = [a['tab'] for a in ACCOUNTS if not a.get('archived')]   # archived tabs keep their history in data/weeks, no new pulls
 
 
 def f(v, d=0.0):
@@ -114,7 +114,8 @@ def apply_ntb(tab, acct, prods, ntb_rows):
             acct['ntbSales'] += f(r['ntb_sales'])
         else:
             for p in prods:
-                if p['name'] == r['product']:
+                # ingest_ntb writes the canonical product name, or the ASIN for CL_US/PP_US (top-N tabs)
+                if p['name'] == r['product'] or r['product'] in p.get('asins', ()):
                     p['ntbOrders'] += f(r['ntb_orders'])
                     p['ntbSales'] += f(r['ntb_sales'])
     if acct['ntbOrders'] == 0 and any(r['tab'] == tab for r in ntb_rows):
@@ -259,6 +260,7 @@ def build_week(week_key):
     we = dt.date.fromisoformat(week_key.replace('WE_', ''))
     week_dir = os.path.join(ROOT, 'data', 'raw', week_key)
     ntb_rows = read_csv(os.path.join(week_dir, 'ntb.csv'))
+    ntb_spend = {r['tab']: f(r['report_spend_in_week']) for r in read_csv(os.path.join(week_dir, 'ntb_spend_check.csv'))}
     out = week_meta(we)
     out['generated_at'] = dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     out['markets'] = {}
@@ -271,6 +273,12 @@ def build_week(week_key):
             continue
         if not ntb_rows:
             m['flags'].append('NTB not loaded for this week (drop the Reports Beta master report in inbox/)')
+        elif tab not in ntb_spend:
+            m['flags'].append('NTB report has no rows for this market: NTB shown as 0')
+        elif m['acct']['adSpend'] and ntb_spend[tab] / m['acct']['adSpend'] < 0.95:
+            cov = ntb_spend[tab] / m['acct']['adSpend'] * 100
+            m['flags'].append(f"NTB report covers only {cov:.0f}% of ad spend ({a['currency']}{ntb_spend[tab]:,.2f} of {a['currency']}{m['acct']['adSpend']:,.2f}); "
+                              f"campaigns are missing from the Reports Beta export, NTB understated")
         out['markets'][tab] = m
     return out
 

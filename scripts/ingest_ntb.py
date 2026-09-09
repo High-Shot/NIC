@@ -6,8 +6,10 @@ Keeps only rows whose Date falls inside the Mon-Sun week, routes each campaign t
 and writes new-to-brand orders and sales per tab (_TOTAL_) and per product. SB rows have no marketplace
 in the export, so the [XX]_ campaign-name prefix decides the market; a campaign with neither is flagged.
 
-Usage: python3 scripts/ingest_ntb.py WE_2026-09-06 inbox/master_report.xlsx [more files...]
+Usage: python3 scripts/ingest_ntb.py WE_2026-09-06 inbox/master_report.csv [more files...]
 Column names are matched loosely (case-insensitive substrings), so a renamed export still works.
+Product routing: advertised product ASIN first (CL_US/PP_US keep the ASIN itself as the product key, matched to the
+top-10 blocks in normalize.py), then an ASIN or product token in the campaign name. Dates like "Aug 20, 2026" are fine.
 """
 import csv, json, os, re, sys, datetime as dt
 from collections import defaultdict
@@ -19,6 +21,12 @@ A2P, TOKENS, PRODUCTS = DM['asin_to_product'], DM['campaign_tokens'], DM['produc
 MKT_TAB = {a['market']: a['tab'] for a in ACCOUNTS if a['brand'] == 'CC'}
 MKT_TAB['AUS'] = 'CC_AUS'
 ACCOUNT_BRAND = [('NIC-CERAKOTE', 'CL_US'), ('LEGACY', 'CL_US'), ('PRISMATIC', 'PP_US')]  # everything else is Cerakote Auto
+# Reports Beta advertiser account names seen 2026-09: NIC-Cerakote = Legacy (spend matches H10 CL_US), PRISMATIC POWDERS,
+# CERAKOTE = Cerakote Auto US/CA/UK/EU/SA, Cerakote AU = Cerakote Auto AU.
+DYNAMIC_TABS = set(DM.get('dynamic_product_tabs', {}))   # product key = ASIN on these tabs
+MKT_CODES = {'AMAZON.COM': 'US', 'AMAZON_COM': 'US', 'UNITED STATES': 'US', 'AMAZON_CO_UK': 'UK', 'UNITED KINGDOM': 'UK', 'GB': 'UK',
+             'AUSTRALIA': 'AU', 'GERMANY': 'DE', 'FRANCE': 'FR', 'ITALY': 'IT', 'SPAIN': 'ES', 'NETHERLANDS': 'NL', 'CANADA': 'CA',
+             'MEXICO': 'MX', 'SAUDI ARABIA': 'SA'}
 
 
 def rows_from(path):
@@ -57,31 +65,46 @@ def to_date(v):
         return v.date()
     if isinstance(v, dt.date):
         return v
-    s = str(v).strip()[:10]
-    for fmt in ('%Y-%m-%d', '%m/%d/%Y', '%d/%m/%Y', '%Y/%m/%d'):
+    s = str(v).strip()
+    for fmt in ('%b %d, %Y', '%B %d, %Y', '%Y-%m-%d', '%m/%d/%Y', '%d/%m/%Y', '%Y/%m/%d'):
         try:
-            return dt.datetime.strptime(s, fmt).date()
+            return dt.datetime.strptime(s[:10] if fmt[0] == '%' and fmt[1] in 'Ymd' else s, fmt).date()
         except ValueError:
             pass
     return None
 
 
-def route(campaign, account, marketplace):
+def market_code(marketplace):
+    """'AMAZON.COM' -> US, 'AMAZON_CO_UK' -> UK, 'UAMAZON_FR' -> FR, 'AMAZON_SA' -> SA, 'CA' -> CA."""
+    m = (marketplace or '').strip().upper()
+    if not m:
+        return None
+    if m in MKT_CODES:
+        return MKT_CODES[m]
+    m2 = re.sub(r'^U?AMAZON[._]', '', m)
+    return MKT_CODES.get(m2, m2[:3] if m2 else None)
+
+
+def route(campaign, account, marketplace, asin=''):
     tab = None
     acc = (account or '').upper()
     for needle, t in ACCOUNT_BRAND:
         if needle in acc:
             tab = t
     if tab is None:
-        m = re.match(r'\[([A-Z]{2,3})\]', campaign or '')
-        mk = m.group(1) if m else (marketplace or '').upper()[:3]
-        mk = {'AMAZON.COM': 'US', 'UNITED STATES': 'US', 'UNITED KINGDOM': 'UK', 'GB': 'UK', 'AUSTRALIA': 'AU', 'GERMANY': 'DE', 'FRANCE': 'FR',
-              'ITALY': 'IT', 'SPAIN': 'ES', 'NETHERLANDS': 'NL', 'CANADA': 'CA', 'MEXICO': 'MX', 'SAUDI ARABIA': 'SA'}.get((marketplace or '').upper(), mk)
+        mk = market_code(marketplace)
+        if mk is None:   # SB rows carry no marketplace: fall back to the [XX] campaign prefix ([CA} typo included)
+            m = re.match(r'\[([A-Z]{2,3})[\]}]', campaign or '')
+            mk = m.group(1) if m else None
         tab = MKT_TAB.get(mk)
-    prod = None
-    m = re.search(r'\b(B0[A-Z0-9]{8})\b', campaign or '')
-    if m:
-        prod = A2P.get(m.group(1))
+    asin = (asin or '').strip().upper()
+    if tab in DYNAMIC_TABS:
+        return tab, (asin if re.fullmatch(r'B0[A-Z0-9]{8}', asin) else None)
+    prod = A2P.get(asin) if asin else None
+    if prod is None:
+        m = re.search(r'(?<![A-Z0-9])(B0[A-Z0-9]{8})(?![A-Z0-9])', (campaign or '').upper())   # \b fails on _ASIN_
+        if m:
+            prod = A2P.get(m.group(1))
     if prod is None:
         for tok, p in TOKENS.items():
             if re.search(r'(^|[_\s\[\]])' + re.escape(tok) + r'([_\s\]]|$)', (campaign or '').upper()):
@@ -110,10 +133,12 @@ def main():
                 cols = list(r.keys())
                 c_date = find_col(cols, 'date')
                 c_camp = find_col(cols, 'campaign name') or find_col(cols, 'campaign')
-                c_acct = find_col(cols, 'account') or find_col(cols, 'advertiser') or find_col(cols, 'profile')
+                c_acct = find_col(cols, 'account', 'name') or find_col(cols, 'account', exclude=('id',)) or find_col(cols, 'advertiser', exclude=('id',)) or find_col(cols, 'profile')
                 c_mkt = find_col(cols, 'marketplace') or find_col(cols, 'country')
+                c_asin = find_col(cols, 'advertised product id') or find_col(cols, 'advertised asin') or find_col(cols, 'asin')
                 c_spend = find_col(cols, 'spend') or find_col(cols, 'cost')
-                c_ntbo = find_col(cols, 'new-to-brand', 'order') or find_col(cols, 'new to brand', 'order') or find_col(cols, 'ntb', 'order')
+                c_ntbo = (find_col(cols, 'new-to-brand', 'order') or find_col(cols, 'new to brand', 'order') or find_col(cols, 'ntb', 'order')
+                          or find_col(cols, 'new-to-brand', 'purchase') or find_col(cols, 'new to brand', 'purchase'))
                 c_ntbs = find_col(cols, 'new-to-brand', 'sales') or find_col(cols, 'new to brand', 'sales') or find_col(cols, 'ntb', 'sales')
                 if not (c_date and c_camp and c_ntbo and c_ntbs):
                     print(f'{path}: cannot find columns (date={c_date}, campaign={c_camp}, ntb orders={c_ntbo}, ntb sales={c_ntbs}). Columns: {cols}')
@@ -123,7 +148,7 @@ def main():
             if d is None or d < mon or d > we:
                 continue
             seen_dates.add(d)
-            tab, prod = route(r.get(c_camp), r.get(c_acct) if c_acct else '', r.get(c_mkt) if c_mkt else '')
+            tab, prod = route(r.get(c_camp), r.get(c_acct) if c_acct else '', r.get(c_mkt) if c_mkt else '', r.get(c_asin) if c_asin else '')
             o, s_ = num(r.get(c_ntbo)), num(r.get(c_ntbs))
             if tab is None:
                 unmatched.append([r.get(c_camp), r.get(c_acct) if c_acct else '', o, s_]); continue
