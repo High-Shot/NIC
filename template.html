@@ -523,8 +523,10 @@ function renderMktView(){
       const pp=pm[p.name];
       const ts=(p.acos>30||p.tacos>15)?'crit':p.tacos>10?'warn':'ok';
       const org=p.organic!=null?p.organic:((p.revenue||0)-(p.adSales||0));
+      const porg=pp?(pp.organic!=null?pp.organic:((pp.revenue||0)-(pp.adSales||0))):null;
       const bsr=(p.categoryBSR||p.bsr);
-      html+=`<tr><td>${p.name}${p.subcategory?`<span class="sub">${p.subcategory}</span>`:''}</td><td>${pp?fCF(pp.revenue||0,cur):'\u2014'}</td><td>${fCF(p.revenue||0,cur)}</td><td>${dd(p.revenue,pp&&pp.revenue)}</td><td>${fN(p.units||0)} ${dd(p.units,pp&&pp.units)}</td><td>${fN(p.sessions||0)}</td><td>${fP(p.cvr||0)}</td><td>${fCF(p.adSpend||0,cur)}</td><td>${fCF(p.adSales||0,cur)}</td><td>${fCF(Math.round(org),cur)}</td><td><span class="pill ${ts}">${fP(p.tacos||0)}</span></td><td>${fP(p.acos||0)}</td><td>${fN(p.ntbOrders||0)}</td><td>${bsr?'#'+bsr:'\u2014'}${p.subcategoryBSR?` <span class="sub" style="display:inline;color:var(--accent)">(#${p.subcategoryBSR})</span>`:''}</td></tr>`;
+      const pbsr=pp?(pp.categoryBSR||pp.bsr):null;
+      html+=`<tr><td>${p.name}${p.subcategory?`<span class="sub">${p.subcategory}</span>`:''}</td><td>${pp?fCF(pp.revenue||0,cur):'\u2014'}</td><td>${fCF(p.revenue||0,cur)}</td><td>${dd(p.revenue,pp&&pp.revenue)}</td><td>${fN(p.units||0)} ${dd(p.units,pp&&pp.units)}</td><td>${fN(p.sessions||0)} ${dd(p.sessions,pp&&pp.sessions)}</td><td>${fP(p.cvr||0)} ${dd(p.cvr,pp&&pp.cvr,true)}</td><td>${fCF(p.adSpend||0,cur)} ${dd(p.adSpend,pp&&pp.adSpend,false,true)}</td><td>${fCF(p.adSales||0,cur)} ${dd(p.adSales,pp&&pp.adSales)}</td><td>${fCF(Math.round(org),cur)} ${dd(org,porg)}</td><td><span class="pill ${ts}">${fP(p.tacos||0)}</span> ${dd(p.tacos,pp&&pp.tacos,true,true)}</td><td>${fP(p.acos||0)} ${dd(p.acos,pp&&pp.acos,true,true)}</td><td>${fN(p.ntbOrders||0)} ${dd(p.ntbOrders,pp&&pp.ntbOrders)}</td><td>${bsr?'#'+bsr:'\u2014'}${p.subcategoryBSR?` <span class="sub" style="display:inline;color:var(--accent)">(#${p.subcategoryBSR})</span>`:''} ${bsr&&pbsr?dd(bsr,pbsr,false,true):''}</td></tr>`;
     });
     html+='</tbody></table></div>';
   } else {
