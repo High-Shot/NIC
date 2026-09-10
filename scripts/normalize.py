@@ -105,6 +105,26 @@ def finish_acct(a):
     return derive(a)
 
 
+def apply_pageviews(tab, acct, prods, week_dir):
+    """Page Views has no Scale Insights / Helium10 source; it comes from the Amazon Business
+    Report. Drop data/raw/<WEEK>/business_report_<TAB>.csv (the Detail Page Sales and Traffic
+    by Child Item export) to light it up. Optional: absent file leaves pageviews at 0, no error.
+    Account = every row's Page Views total; products = child ASINs that map via data_map.json."""
+    path = os.path.join(week_dir, f'business_report_{tab}.csv')
+    if not os.path.exists(path):
+        return
+    by_name = {p['name']: p for p in prods}
+    total = 0
+    for r in read_csv(path):
+        child = (r.get('(Child) ASIN') or r.get('(Child) Asin') or '').strip()
+        pv = int(f(str(r.get('Page Views - Total', 0) or 0).replace(',', '').replace('"', '')))
+        total += pv
+        name = A2P.get(child)
+        if name in by_name:
+            by_name[name]['pageviews'] += pv
+    acct['pageviews'] = total
+
+
 def apply_ntb(tab, acct, prods, ntb_rows):
     for r in ntb_rows:
         if r['tab'] != tab:
@@ -271,6 +291,7 @@ def build_week(week_key):
         if m is None:
             out['missing'].append(tab)
             continue
+        apply_pageviews(tab, m['acct'], m['products'], week_dir)
         if not ntb_rows:
             m['flags'].append('NTB not loaded for this week (drop the Reports Beta master report in inbox/)')
         elif tab not in ntb_spend:

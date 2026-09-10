@@ -26,6 +26,8 @@ market,asin,sku,title,sales,units,orders,ppc_cost,ppc_sales,sessions
 ```
 First data row is the account total from `Summary`: `market,_TOTAL_,,,TotalSales,TotalUnits,TotalOrders,TotalPPCCost,TotalPPCSales,TotalSessions`. Then one row per ASIN: ASIN, SKU, Title (first 80 chars, no commas needed since the field is quoted), TotalSales, TotalUnits, TotalOrders, TotalPPCCost, TotalPPCSales, TotalSessions. Include zero-sales ASINs. When the result overflows to a tool-results file, convert it with `python3 scripts/tools/sales_to_csv.py <file> <CC> <dest>` instead of retyping.
 
+Page Views: Scale Insights and Helium10 do not report Page Views, so it is sourced from the Amazon Business Report. To populate it for a market, drop that market's "Detail Page Sales and Traffic by Child Item" export (same Mon–Sun range) at `data/raw/$WEEK/business_report_<TAB>.csv` (e.g. `business_report_CC_US.csv`). normalize.py sums its `Page Views - Total` by `(Child) ASIN` into each product and the account. The file is optional: no file leaves Page Views at 0 for that market, nothing else is affected.
+
 1b. `mcp__Scale_Insights__get_campaign_performance` with `country, start_date, end_date, mode: "raw", count: 1, sort_by: "cost"`. Only the `agg` block matters.
 Write `data/raw/$WEEK/si_campaigns_<CC>.csv`:
 ```
