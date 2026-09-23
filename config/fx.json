@@ -1,11 +1,11 @@
 {
  "_note": "Units of foreign currency per 1 USD. Source: open.er-api.com, USD base. Refreshed by scripts/fx_update.py on each run; falls back to these values if the fetch fails.",
- "as_of": "2026-09-16",
+ "as_of": "2026-09-23",
  "USD": 1.0,
- "CAD": 1.391261,
- "GBP": 0.742032,
- "EUR": 0.86671,
- "AUD": 1.403148,
+ "CAD": 1.405443,
+ "GBP": 0.749328,
+ "EUR": 0.873207,
+ "AUD": 1.406391,
  "SAR": 3.75,
- "MXN": 17.157696
+ "MXN": 17.283601
 }
