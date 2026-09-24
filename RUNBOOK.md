@@ -1,6 +1,6 @@
 # NIC weekly sales tracker: Wednesday run
 
-Runs every Wednesday 06:00 CT as a Cowork scheduled task. Fresh session, no memory. Everything needed is below.
+Runs every Wednesday 09:00 CT (moved from 06:00 on 2026-09-24 so the 07:57 CT NTB report email is already in Gmail) as a Cowork scheduled task. Fresh session, no memory. Everything needed is below.
 Repo: https://github.com/High-Shot/NIC (Pages serves `index.html` from main). Local clone on Barcus's Mac: `~/Documents/Claude/Projects/Cerakote Management/nic-tracker` (connected folder "Cerakote Management"; gh is logged in there, no token stored anywhere).
 
 Reporting week = Monday to Sunday. WEEK = the Sunday just passed, formatted `WE_YYYY-MM-DD`; START = that Monday. On a Wednesday run: WEEK = `date -d 'last sunday' +WE_%F`, START = `date -d 'last sunday -6 days' +%F`, END = the Sunday.
@@ -59,7 +59,16 @@ tab,asin,name,sales,gross_revenue,units,sessions,ad_cost,ads_acos
 Short name: strip "CERAKOTE"/"PRISMATIC POWDERS", keep colour/size/code, under 45 chars. ad_cost as a positive number.
 
 ## 3. NTB (until the Ads API is connected)
-If `inbox/*.xlsx` or `inbox/*.csv` exist (the Reports Beta master report, daily rows, last 30 days, all advertiser accounts): `python3 scripts/ingest_ntb.py $WEEK inbox/<file>` and again for the prior WEEK (the 30-day window covers both), then move the file to `inbox/processed/`. Check `data/raw/$WEEK/ntb_spend_check.csv` against the Scale Insights and Helium10 spend totals: they match to the cent when the export is complete; normalize.py flags any tab under 95% coverage (known: CC_UK at 65%, campaigns missing from the export). If the Gmail search `from:amazon subject:"report" newer_than:3d has:attachment` finds the scheduled report attachment, save it to `inbox/` first (`mcp__Gmail__get_message` for the attachment). No file: continue, the week is flagged "NTB not loaded".
+Source: the scheduled Reports Beta report "NIC Weekly Tracker - Master Ad Report - 30" (daily rows, last 30 days, all advertiser accounts). Amazon emails it Wednesdays around 07:57 CT from no-reply@ads.amazon.com. The email has NO attachment: it holds a pre-signed S3 download link that expires 48 hours after sending. (Before 2026-09-24 this step searched `has:attachment` at 06:00 CT, two hours before the email lands, so it never found anything and WE 9/13 and 9/20 shipped with NTB = 0.)
+
+3a. Gmail search `from:no-reply@ads.amazon.com subject:"Master Ad Report" newer_than:2d`. Take the newest message, `mcp__Gmail__get_message` with `messageFormat: FULL_CONTENT`, write its `htmlBody` to a scratch file, then:
+```
+python3 scripts/tools/fetch_ntb_report.py <scratch html file> inbox
+```
+It prints the saved CSV path. If no email is found or the download fails, also use any file Barcus dropped in `inbox/` by hand.
+3b. For each file in `inbox/`: `python3 scripts/ingest_ntb.py $WEEK inbox/<file>` and again for the prior WEEK (the 30-day window covers both), then move the file to `inbox/processed/`. Commit `inbox/processed/` with the rest.
+3c. Check `data/raw/$WEEK/ntb_spend_check.csv` against the Scale Insights and Helium10 spend totals: they match to the cent when the export is complete; normalize.py flags any tab under 95% coverage.
+No report at all: continue, the week is flagged "NTB not loaded", and say so at the TOP of the summary to Barcus (the dashboard shows 0 NTB until it is loaded).
 
 ## 4. Normalize, build, QA
 ```

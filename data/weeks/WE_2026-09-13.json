@@ -4,7 +4,7 @@
  "label": "WE 9/13",
  "range": "9/7 – 9/13",
  "fullLabel": "Week Ending Sun September 13, 2026",
- "generated_at": "2026-09-23T11:16:49Z",
+ "generated_at": "2026-09-24T16:12:54Z",
  "markets": {
   "CC_US": {
    "acct": {
@@ -16,13 +16,13 @@
     "adSpend": 33349.35,
     "adSales": 156286.2,
     "organicSales": 200534.21,
-    "ntbOrders": 0,
-    "ntbSales": 0.0,
+    "ntbOrders": 607.0,
+    "ntbSales": 12420.99,
     "cvr": 21.47,
     "acos": 21.34,
     "tacos": 9.35,
     "roas": 4.69,
-    "ntbPct": 0.0
+    "ntbPct": 3.19
    },
    "products": [
     {
@@ -42,8 +42,8 @@
      "adSpend": 16830.75,
      "adSales": 76911.84,
      "organic": 115006.99,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 376.0,
+     "ntbSales": 7566.82,
      "bsr": "12",
      "categoryBSR": 12,
      "subcategory": "Automotive Headlight Restoration Kits",
@@ -53,7 +53,7 @@
      "acos": 21.88,
      "tacos": 8.77,
      "roas": 4.57,
-     "ntbPct": 0.0,
+     "ntbPct": 3.7,
      "status": "ok"
     },
     {
@@ -72,8 +72,8 @@
      "adSpend": 6246.74,
      "adSales": 32125.69,
      "organic": 32639.34,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 99.0,
+     "ntbSales": 2209.51,
      "bsr": "106",
      "categoryBSR": 106,
      "subcategory": "Automotive Plastic Care Products",
@@ -83,7 +83,7 @@
      "acos": 19.44,
      "tacos": 9.65,
      "roas": 5.14,
-     "ntbPct": 0.0,
+     "ntbPct": 2.87,
      "status": "ok"
     },
     {
@@ -105,8 +105,8 @@
      "adSpend": 2542.79,
      "adSales": 9592.3,
      "organic": 15106.65,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 125.0,
+     "ntbSales": 2522.95,
      "bsr": "616",
      "categoryBSR": 616,
      "subcategory": "Waxes",
@@ -116,7 +116,7 @@
      "acos": 26.51,
      "tacos": 10.3,
      "roas": 3.77,
-     "ntbPct": 0.0,
+     "ntbPct": 10.76,
      "status": "warn"
     },
     {
@@ -136,8 +136,8 @@
      "adSpend": 1966.72,
      "adSales": 9801.7,
      "organic": 10486.35,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 7.0,
+     "ntbSales": 121.71,
      "bsr": "529",
      "categoryBSR": 529,
      "subcategory": "Automotive Wheel Care",
@@ -147,7 +147,7 @@
      "acos": 20.07,
      "tacos": 9.69,
      "roas": 4.98,
-     "ntbPct": 0.0,
+     "ntbPct": 0.56,
      "status": "ok"
     },
     {
@@ -166,7 +166,7 @@
      "adSpend": 2288.85,
      "adSales": 10754.0,
      "organic": 5030.05,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "768",
      "categoryBSR": 768,
@@ -196,7 +196,7 @@
      "adSpend": 1365.61,
      "adSales": 8155.83,
      "organic": 6495.77,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "9494",
      "categoryBSR": 9494,
@@ -228,7 +228,7 @@
      "adSpend": 56.65,
      "adSales": 209.21,
      "organic": 6186.41,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "2687",
      "categoryBSR": 2687,
@@ -258,7 +258,7 @@
      "adSpend": 819.11,
      "adSales": 3360.57,
      "organic": 1493.48,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "2366",
      "categoryBSR": 2366,
@@ -286,7 +286,7 @@
      "adSpend": 788.14,
      "adSales": 2578.23,
      "organic": 1843.82,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "3232",
      "categoryBSR": 3232,
@@ -314,7 +314,7 @@
      "adSpend": 315.68,
      "adSales": 2291.95,
      "organic": 1262.23,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "5172",
      "categoryBSR": 5172,
@@ -341,7 +341,7 @@
      "adSpend": 65.85,
      "adSales": 232.61,
      "organic": 2094.49,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "10727",
      "categoryBSR": 10727,
@@ -388,8 +388,7 @@
     "Bundle: $420.75 in account total, no product block (B0F3GD9G6N, B0F2JBJXYJ, B0F23KPC5G, B0F2JKWWMM)",
     "Glass Cleaner: $191.52 in account total, no product block (B0GZSHD4GP)",
     "Aircraft Ceramic Coating: $139.95 in account total, no product block (B0H51RDY69)",
-    "Ad spend not attributed to an ASIN by Scale Insights (multi-ASIN SB/SD campaigns): $2,210.54 (6.6% of spend), allocated to products pro rata",
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
+    "Ad spend not attributed to an ASIN by Scale Insights (multi-ASIN SB/SD campaigns): $2,210.54 (6.6% of spend), allocated to products pro rata"
    ],
    "source": "scale_insights"
   },
@@ -403,13 +402,13 @@
     "adSpend": 4052.01,
     "adSales": 28512.76,
     "organicSales": 18723.96,
-    "ntbOrders": 0,
-    "ntbSales": 0.0,
+    "ntbOrders": 34.0,
+    "ntbSales": 1067.02,
     "cvr": 14.04,
     "acos": 14.21,
     "tacos": 8.58,
     "roas": 7.04,
-    "ntbPct": 0.0
+    "ntbPct": 2.2
    },
    "products": [
     {
@@ -425,8 +424,8 @@
      "adSpend": 2137.24,
      "adSales": 17622.66,
      "organic": 13188.6,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 10.0,
+     "ntbSales": 370.81,
      "bsr": "2",
      "categoryBSR": 2,
      "subcategory": "Automotive Headlight Restoration Kits",
@@ -436,7 +435,7 @@
      "acos": 12.13,
      "tacos": 6.94,
      "roas": 8.25,
-     "ntbPct": 0.0,
+     "ntbPct": 1.08,
      "status": "ok"
     },
     {
@@ -454,8 +453,8 @@
      "adSpend": 602.05,
      "adSales": 4758.53,
      "organic": 2018.79,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 13.0,
+     "ntbSales": 401.17,
      "bsr": "154",
      "categoryBSR": 154,
      "subcategory": "Exterior Care Products",
@@ -465,7 +464,7 @@
      "acos": 12.65,
      "tacos": 8.88,
      "roas": 7.9,
-     "ntbPct": 0.0,
+     "ntbPct": 5.91,
      "status": "ok"
     },
     {
@@ -481,8 +480,8 @@
      "adSpend": 449.04,
      "adSales": 2201.26,
      "organic": 871.73,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 4.0,
+     "ntbSales": 119.44,
      "bsr": "531",
      "categoryBSR": 531,
      "subcategory": "Automotive Sealants",
@@ -492,7 +491,7 @@
      "acos": 20.4,
      "tacos": 14.61,
      "roas": 4.9,
-     "ntbPct": 0.0,
+     "ntbPct": 3.85,
      "status": "warn"
     },
     {
@@ -508,8 +507,8 @@
      "adSpend": 571.65,
      "adSales": 2238.87,
      "organic": 1176.71,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 7.0,
+     "ntbSales": 175.6,
      "bsr": "352",
      "categoryBSR": 352,
      "subcategory": "Tire & Wheel Care Products",
@@ -519,7 +518,7 @@
      "acos": 25.53,
      "tacos": 16.74,
      "roas": 3.92,
-     "ntbPct": 0.0,
+     "ntbPct": 4.49,
      "status": "crit"
     },
     {
@@ -536,7 +535,7 @@
      "adSpend": 292.03,
      "adSales": 1691.44,
      "organic": 465.86,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "694",
      "categoryBSR": 694,
@@ -737,8 +736,7 @@
    ],
    "flags": [
     "PPF and Vinyl Sealant: C$38.33 in account total, no product block (B0H1NP4461, B0H1SP98C3)",
-    "Ad spend not attributed to an ASIN by Scale Insights (multi-ASIN SB/SD campaigns): C$0.56 (0.0% of spend), allocated to products pro rata",
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
+    "Ad spend not attributed to an ASIN by Scale Insights (multi-ASIN SB/SD campaigns): C$0.56 (0.0% of spend), allocated to products pro rata"
    ],
    "source": "scale_insights"
   },
@@ -752,13 +750,13 @@
     "adSpend": 2480.01,
     "adSales": 11524.83,
     "organicSales": 14150.16,
-    "ntbOrders": 0,
-    "ntbSales": 0.0,
+    "ntbOrders": 26.0,
+    "ntbSales": 369.76,
     "cvr": 18.81,
     "acos": 21.52,
     "tacos": 9.66,
     "roas": 4.65,
-    "ntbPct": 0.0
+    "ntbPct": 1.74
    },
    "products": [
     {
@@ -774,8 +772,8 @@
      "adSpend": 1773.41,
      "adSales": 9648.25,
      "organic": 10996.67,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 21.0,
+     "ntbSales": 310.82,
      "bsr": "28",
      "categoryBSR": 28,
      "subcategory": "Car & Motorbike Care",
@@ -785,7 +783,7 @@
      "acos": 18.38,
      "tacos": 8.59,
      "roas": 5.44,
-     "ntbPct": 0.0,
+     "ntbPct": 1.82,
      "status": "ok"
     },
     {
@@ -801,7 +799,7 @@
      "adSpend": 0.0,
      "adSales": 0.0,
      "organic": 0.0,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "11522",
      "categoryBSR": 11522,
@@ -828,7 +826,7 @@
      "adSpend": 137.03,
      "adSales": 472.82,
      "organic": 296.23,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "3072",
      "categoryBSR": 3072,
@@ -855,8 +853,8 @@
      "adSpend": 409.88,
      "adSales": 1147.23,
      "organic": 1070.82,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 5.0,
+     "ntbSales": 58.94,
      "bsr": "459",
      "categoryBSR": 459,
      "subcategory": "Tyre Gloss",
@@ -866,7 +864,7 @@
      "acos": 35.73,
      "tacos": 18.48,
      "roas": 2.8,
-     "ntbPct": 0.0,
+     "ntbPct": 3.14,
      "status": "crit"
     },
     {
@@ -882,7 +880,7 @@
      "adSpend": 51.82,
      "adSales": 112.14,
      "organic": 874.94,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "1943",
      "categoryBSR": 1943,
@@ -963,7 +961,7 @@
      "adSpend": 47.36,
      "adSales": 63.84,
      "organic": 89.46,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "6581",
      "categoryBSR": 6581,
@@ -990,7 +988,7 @@
      "adSpend": 54.87,
      "adSales": 69.76,
      "organic": 240.94,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "3235",
      "categoryBSR": 3235,
@@ -1017,7 +1015,7 @@
      "adSpend": 5.64,
      "adSales": 10.79,
      "organic": 77.7,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "13670",
      "categoryBSR": 13670,
@@ -1086,9 +1084,7 @@
      "status": "ok"
     }
    ],
-   "flags": [
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
-   ],
+   "flags": [],
    "source": "scale_insights"
   },
   "CC_FR": {
@@ -1101,13 +1097,13 @@
     "adSpend": 823.89,
     "adSales": 2668.64,
     "organicSales": 4166.13,
-    "ntbOrders": 0,
-    "ntbSales": 0.0,
+    "ntbOrders": 7.0,
+    "ntbSales": 142.97,
     "cvr": 13.55,
     "acos": 30.87,
     "tacos": 12.05,
     "roas": 3.24,
-    "ntbPct": 0.0
+    "ntbPct": 2.26
    },
    "products": [
     {
@@ -1123,8 +1119,8 @@
      "adSpend": 577.91,
      "adSales": 1888.73,
      "organic": 3647.95,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 4.0,
+     "ntbSales": 95.6,
      "bsr": "154",
      "categoryBSR": 154,
      "subcategory": "Kit restauration de phares auto et moto",
@@ -1134,7 +1130,7 @@
      "acos": 30.6,
      "tacos": 10.44,
      "roas": 3.27,
-     "ntbPct": 0.0,
+     "ntbPct": 1.65,
      "status": "crit"
     },
     {
@@ -1150,7 +1146,7 @@
      "adSpend": 47.64,
      "adSales": 232.57,
      "organic": 244.49,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "5827",
      "categoryBSR": 5827,
@@ -1204,8 +1200,8 @@
      "adSpend": 186.01,
      "adSales": 522.42,
      "organic": 42.92,
-     "ntbOrders": 0,
-     "ntbSales": 0.0,
+     "ntbOrders": 3.0,
+     "ntbSales": 47.37,
      "bsr": "2173",
      "categoryBSR": 2173,
      "subcategory": "Lustrants pour pneus auto et moto",
@@ -1215,7 +1211,7 @@
      "acos": 35.61,
      "tacos": 32.9,
      "roas": 2.81,
-     "ntbPct": 0.0,
+     "ntbPct": 10.0,
      "status": "crit"
     },
     {
@@ -1339,7 +1335,7 @@
      "adSpend": 12.33,
      "adSales": 24.92,
      "organic": 34.88,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "29056",
      "categoryBSR": 29056,
@@ -1431,9 +1427,7 @@
      "status": "ok"
     }
    ],
-   "flags": [
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
-   ],
+   "flags": [],
    "source": "scale_insights"
   },
   "CC_DE": {
@@ -1446,7 +1440,7 @@
     "adSpend": 518.38,
     "adSales": 1221.69,
     "organicSales": 2841.1,
-    "ntbOrders": 0,
+    "ntbOrders": 0.0,
     "ntbSales": 0.0,
     "cvr": 17.19,
     "acos": 42.43,
@@ -1495,7 +1489,7 @@
      "adSpend": 107.24,
      "adSales": 458.73,
      "organic": 1151.43,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "1550",
      "categoryBSR": 1550,
@@ -1549,7 +1543,7 @@
      "adSpend": 393.01,
      "adSales": 737.0,
      "organic": 708.34,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "2353",
      "categoryBSR": 2353,
@@ -1684,7 +1678,7 @@
      "adSpend": 18.13,
      "adSales": 25.96,
      "organic": 81.89,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "23533",
      "categoryBSR": 23533,
@@ -1776,9 +1770,7 @@
      "status": "ok"
     }
    ],
-   "flags": [
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
-   ],
+   "flags": [],
    "source": "scale_insights"
   },
   "CC_IT": {
@@ -1791,7 +1783,7 @@
     "adSpend": 165.61,
     "adSales": 508.73,
     "organicSales": 1606.82,
-    "ntbOrders": 0,
+    "ntbOrders": 0.0,
     "ntbSales": 0.0,
     "cvr": 6.17,
     "acos": 32.55,
@@ -1813,7 +1805,7 @@
      "adSpend": 153.67,
      "adSales": 436.77,
      "organic": 1054.98,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "612",
      "categoryBSR": 612,
@@ -1840,7 +1832,7 @@
      "adSpend": 7.24,
      "adSales": 71.96,
      "organic": 191.44,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "5729",
      "categoryBSR": 5729,
@@ -1867,7 +1859,7 @@
      "adSpend": 4.7,
      "adSales": 0.0,
      "organic": 206.55,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "13968",
      "categoryBSR": 13968,
@@ -2121,9 +2113,7 @@
      "status": "ok"
     }
    ],
-   "flags": [
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
-   ],
+   "flags": [],
    "source": "scale_insights"
   },
   "CC_ES": {
@@ -2136,7 +2126,7 @@
     "adSpend": 529.96,
     "adSales": 1344.08,
     "organicSales": 2169.52,
-    "ntbOrders": 0,
+    "ntbOrders": 0.0,
     "ntbSales": 0.0,
     "cvr": 6.6,
     "acos": 39.43,
@@ -2158,7 +2148,7 @@
      "adSpend": 250.81,
      "adSales": 747.13,
      "organic": 1616.45,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "280",
      "categoryBSR": 280,
@@ -2185,7 +2175,7 @@
      "adSpend": 31.36,
      "adSales": 313.27,
      "organic": 43.16,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "2541",
      "categoryBSR": 2541,
@@ -2212,7 +2202,7 @@
      "adSpend": 186.93,
      "adSales": 208.67,
      "organic": 251.47,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "6977",
      "categoryBSR": 6977,
@@ -2239,7 +2229,7 @@
      "adSpend": 60.86,
      "adSales": 75.01,
      "organic": 94.77,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "3768",
      "categoryBSR": 3768,
@@ -2372,7 +2362,7 @@
      "adSpend": 0.0,
      "adSales": 0.0,
      "organic": 64.96,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "37616",
      "categoryBSR": 37616,
@@ -2464,9 +2454,7 @@
      "status": "ok"
     }
    ],
-   "flags": [
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
-   ],
+   "flags": [],
    "source": "scale_insights"
   },
   "CC_NL": {
@@ -2479,7 +2467,7 @@
     "adSpend": 38.18,
     "adSales": 291.76,
     "organicSales": 1202.44,
-    "ntbOrders": 0,
+    "ntbOrders": 0.0,
     "ntbSales": 0.0,
     "cvr": 13.79,
     "acos": 13.09,
@@ -2501,7 +2489,7 @@
      "adSpend": 8.52,
      "adSales": 97.25,
      "organic": 782.65,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "12",
      "categoryBSR": 12,
@@ -2528,7 +2516,7 @@
      "adSpend": 11.29,
      "adSales": 97.28,
      "organic": 261.82,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "105",
      "categoryBSR": 105,
@@ -2582,7 +2570,7 @@
      "adSpend": 7.76,
      "adSales": 55.21,
      "organic": 63.44,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "987",
      "categoryBSR": 987,
@@ -2609,7 +2597,7 @@
      "adSpend": 1.04,
      "adSales": 14.01,
      "organic": 36.84,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "1716",
      "categoryBSR": 1716,
@@ -2688,7 +2676,7 @@
      "adSpend": 0.69,
      "adSales": 0.0,
      "organic": 25.9,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "5860",
      "categoryBSR": 5860,
@@ -2715,7 +2703,7 @@
      "adSpend": 8.88,
      "adSales": 28.01,
      "organic": 10.84,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "766",
      "categoryBSR": 766,
@@ -2805,9 +2793,7 @@
      "status": "ok"
     }
    ],
-   "flags": [
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
-   ],
+   "flags": [],
    "source": "scale_insights"
   },
   "CC_AUS": {
@@ -2820,7 +2806,7 @@
     "adSpend": 578.23,
     "adSales": 5509.18,
     "organicSales": 7796.66,
-    "ntbOrders": 0,
+    "ntbOrders": 0.0,
     "ntbSales": 0.0,
     "cvr": 11.88,
     "acos": 10.5,
@@ -2842,7 +2828,7 @@
      "adSpend": 390.32,
      "adSales": 3997.78,
      "organic": 6264.36,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "13",
      "categoryBSR": 13,
@@ -2869,7 +2855,7 @@
      "adSpend": 16.84,
      "adSales": 32.95,
      "organic": 593.1,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "419",
      "categoryBSR": 419,
@@ -2896,7 +2882,7 @@
      "adSpend": 33.21,
      "adSales": 528.15,
      "organic": -154.7,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "1291",
      "categoryBSR": 1291,
@@ -2923,7 +2909,7 @@
      "adSpend": 71.39,
      "adSales": 474.15,
      "organic": 280.5,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "639",
      "categoryBSR": 639,
@@ -2950,7 +2936,7 @@
      "adSpend": 48.15,
      "adSales": 332.45,
      "organic": 254.5,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "591",
      "categoryBSR": 591,
@@ -3058,7 +3044,7 @@
      "adSpend": 18.32,
      "adSales": 143.7,
      "organic": 97.75,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "1011",
      "categoryBSR": 1011,
@@ -3152,9 +3138,7 @@
      "status": "ok"
     }
    ],
-   "flags": [
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
-   ],
+   "flags": [],
    "source": "scale_insights"
   },
   "CC_SA": {
@@ -3167,7 +3151,7 @@
     "adSpend": 132.16,
     "adSales": 1141.28,
     "organicSales": 2513.1,
-    "ntbOrders": 0,
+    "ntbOrders": 0.0,
     "ntbSales": 0.0,
     "cvr": 5.96,
     "acos": 11.58,
@@ -3189,7 +3173,7 @@
      "adSpend": 33.74,
      "adSales": 795.75,
      "organic": 1594.58,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3241,7 +3225,7 @@
      "adSpend": 32.32,
      "adSales": 167.98,
      "organic": 436.67,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3268,7 +3252,7 @@
      "adSpend": 50.4,
      "adSales": 127.98,
      "organic": 131.82,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3320,7 +3304,7 @@
      "adSpend": 4.28,
      "adSales": 0.0,
      "organic": 0.0,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3347,7 +3331,7 @@
      "adSpend": 1.16,
      "adSales": 0.0,
      "organic": 49.95,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3374,7 +3358,7 @@
      "adSpend": 8.17,
      "adSales": 49.01,
      "organic": 100.84,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3401,7 +3385,7 @@
      "adSpend": 0.48,
      "adSales": 0.0,
      "organic": 149.85,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3455,7 +3439,7 @@
      "adSpend": 1.61,
      "adSales": 0.0,
      "organic": 0.0,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3496,8 +3480,7 @@
     }
    ],
    "flags": [
-    "CC_SA: ad sales derived from Helium10 ACoS (spend / ACoS); SB/SD detail not available until the Ads API is connected",
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
+    "CC_SA: ad sales derived from Helium10 ACoS (spend / ACoS); SB/SD detail not available until the Ads API is connected"
    ],
    "source": "helium10"
   },
@@ -3511,13 +3494,13 @@
     "adSpend": 978.19,
     "adSales": 1429.68,
     "organicSales": 19650.39,
-    "ntbOrders": 0,
-    "ntbSales": 0.0,
+    "ntbOrders": 19.0,
+    "ntbSales": 500.03,
     "cvr": 14.59,
     "acos": 68.42,
     "tacos": 4.64,
     "roas": 1.46,
-    "ntbPct": 0.0
+    "ntbPct": 5.85
    },
    "products": [
     {
@@ -3533,7 +3516,7 @@
      "adSpend": 123.44,
      "adSales": 147.99,
      "organic": 1343.01,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3587,7 +3570,7 @@
      "adSpend": 14.11,
      "adSales": 100.0,
      "organic": 907.5,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3614,7 +3597,7 @@
      "adSpend": 121.32,
      "adSales": 259.01,
      "organic": 520.93,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3668,7 +3651,7 @@
      "adSpend": 14.72,
      "adSales": 0.0,
      "organic": 539.97,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3695,7 +3678,7 @@
      "adSpend": 47.19,
      "adSales": 536.86,
      "organic": 3.11,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3792,8 +3775,7 @@
     }
    ],
    "flags": [
-    "CL_US: ad sales derived from Helium10 ACoS (spend / ACoS); SB/SD detail not available until the Ads API is connected",
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
+    "CL_US: ad sales derived from Helium10 ACoS (spend / ACoS); SB/SD detail not available until the Ads API is connected"
    ],
    "source": "helium10"
   },
@@ -3807,13 +3789,13 @@
     "adSpend": 1024.39,
     "adSales": 1380.02,
     "organicSales": 10133.62,
-    "ntbOrders": 0,
-    "ntbSales": 0.0,
+    "ntbOrders": 33.0,
+    "ntbSales": 1051.23,
     "cvr": 23.26,
     "acos": 74.23,
     "tacos": 8.9,
     "roas": 1.35,
-    "ntbPct": 0.0
+    "ntbPct": 8.53
    },
    "products": [
     {
@@ -3856,7 +3838,7 @@
      "adSpend": 221.56,
      "adSales": 581.06,
      "organic": 477.86,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3883,7 +3865,7 @@
      "adSpend": 185.66,
      "adSales": 169.0,
      "organic": 511.8,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3910,7 +3892,7 @@
      "adSpend": 60.97,
      "adSales": 144.0,
      "organic": 432.28,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3964,7 +3946,7 @@
      "adSpend": 20.01,
      "adSales": 53.99,
      "organic": 456.64,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -3991,7 +3973,7 @@
      "adSpend": 13.27,
      "adSales": 0.0,
      "organic": 394.66,
-     "ntbOrders": 0,
+     "ntbOrders": 0.0,
      "ntbSales": 0.0,
      "bsr": "",
      "categoryBSR": null,
@@ -4088,8 +4070,7 @@
     }
    ],
    "flags": [
-    "PP_US: ad sales derived from Helium10 ACoS (spend / ACoS); SB/SD detail not available until the Ads API is connected",
-    "NTB not loaded for this week (drop the Reports Beta master report in inbox/)"
+    "PP_US: ad sales derived from Helium10 ACoS (spend / ACoS); SB/SD detail not available until the Ads API is connected"
    ],
    "source": "helium10"
   }
