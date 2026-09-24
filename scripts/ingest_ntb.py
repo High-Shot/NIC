@@ -124,6 +124,7 @@ def main():
     os.makedirs(out_dir, exist_ok=True)
     totals = defaultdict(lambda: [0.0, 0.0])       # (tab, product|_TOTAL_) -> [orders, sales]
     spend = defaultdict(float)                       # tab -> spend inside the week (cross-check vs Scale Insights)
+    ads = defaultdict(lambda: [0.0, 0.0])            # (tab, product|_TOTAL_) -> [spend, ad sales]; normalize.py uses it for Helium10 tabs
     unmatched = []
     seen_dates = set()
     for path in sys.argv[2:]:
@@ -137,6 +138,7 @@ def main():
                 c_mkt = find_col(cols, 'marketplace') or find_col(cols, 'country')
                 c_asin = find_col(cols, 'advertised product id') or find_col(cols, 'advertised asin') or find_col(cols, 'asin')
                 c_spend = find_col(cols, 'spend') or find_col(cols, 'cost')
+                c_sales = next((c for c in cols if c.strip().lower() in ('sales', 'total sales', '7 day total sales', '14 day total sales')), None)
                 c_ntbo = (find_col(cols, 'new-to-brand', 'order') or find_col(cols, 'new to brand', 'order') or find_col(cols, 'ntb', 'order')
                           or find_col(cols, 'new-to-brand', 'purchase') or find_col(cols, 'new to brand', 'purchase'))
                 c_ntbs = find_col(cols, 'new-to-brand', 'sales') or find_col(cols, 'new to brand', 'sales') or find_col(cols, 'ntb', 'sales')
@@ -155,6 +157,10 @@ def main():
             totals[(tab, '_TOTAL_')][0] += o; totals[(tab, '_TOTAL_')][1] += s_
             if c_spend:
                 spend[tab] += num(r.get(c_spend))
+                sp_, sa_ = num(r.get(c_spend)), num(r.get(c_sales)) if c_sales else 0.0
+                ads[(tab, '_TOTAL_')][0] += sp_; ads[(tab, '_TOTAL_')][1] += sa_
+                if prod:
+                    ads[(tab, prod)][0] += sp_; ads[(tab, prod)][1] += sa_
             if prod:
                 totals[(tab, prod)][0] += o; totals[(tab, prod)][1] += s_
             elif o or s_:
@@ -165,6 +171,10 @@ def main():
             w.writerow([tab, prod, int(round(o)), round(s_, 2)])
     with open(os.path.join(out_dir, 'ntb_spend_check.csv'), 'w', newline='') as fh:
         w = csv.writer(fh); w.writerow(['tab', 'report_spend_in_week']); [w.writerow([t, round(v, 2)]) for t, v in sorted(spend.items())]
+    with open(os.path.join(out_dir, 'ads.csv'), 'w', newline='') as fh:
+        w = csv.writer(fh); w.writerow(['tab', 'product', 'spend', 'sales'])
+        for (tab, prod), (sp_, sa_) in sorted(ads.items()):
+            w.writerow([tab, prod, round(sp_, 2), round(sa_, 2)])
     if unmatched:
         agg = defaultdict(lambda: [0.0, 0.0])
         for c, t, o, s_ in unmatched:

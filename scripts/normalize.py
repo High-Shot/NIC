@@ -258,6 +258,26 @@ def build_h10(tab, week_dir, ntb_rows):
                 keep.append(blank_prod(n))
         keep.sort(key=lambda p: order[p['name']])
         prods = keep
+    # Ad totals: Helium10 only gives spend and ACoS, and its implied ad sales miss most SB/SD sales. When the Reports Beta
+    # master report is loaded (scripts/ingest_ntb.py -> ads.csv), its spend and sales replace Helium10's (its spend matches
+    # Helium10 to the cent). Product level: ASIN-attributed report rows plus a pro-rata share of the unattributed remainder.
+    ads = {r['product']: r for r in read_csv(os.path.join(week_dir, 'ads.csv')) if r['tab'] == tab}
+    ads_from_report = bool(ads.get('_TOTAL_')) and f(ads['_TOTAL_']['spend']) > 0
+    if ads_from_report:
+        acct['adSpend'] = f(ads['_TOTAL_']['spend']); acct['adSales'] = f(ads['_TOTAL_']['sales'])
+        for p in prods:
+            keys = p['asins'] if dyn else [p['name']]
+            p['adSpend'] = sum(f(ads[k]['spend']) for k in keys if k in ads)
+            p['adSales'] = sum(f(ads[k]['sales']) for k in keys if k in ads)
+        attributed = sum(f(r['spend']) for k, r in ads.items() if k != '_TOTAL_')
+        attributed_sales = sum(f(r['sales']) for k, r in ads.items() if k != '_TOTAL_')
+        gap_sp, gap_sa = acct['adSpend'] - attributed, acct['adSales'] - attributed_sales
+        if gap_sp > 0.5 and attributed > 0:
+            for p in prods:   # share of ALL attributed spend, so ASINs outside the shown product blocks keep their share
+                share = p['adSpend'] / attributed
+                p['adSpend'] += gap_sp * share
+                p['adSales'] += gap_sa * (p['adSales'] / attributed_sales if attributed_sales else share)
+            flags.append(f"Ad spend on multi-ASIN SB/SD campaigns: {a['currency']}{gap_sp:,.2f} ({gap_sp / acct['adSpend'] * 100:.1f}% of spend), allocated to products pro rata")
     by_asin = {r['asin']: r for r in bsr}
     for p in prods:
         c = [by_asin[x] for x in p['asins'] if x in by_asin]
@@ -267,11 +287,18 @@ def build_h10(tab, week_dir, ntb_rows):
             p['subcategory'] = best.get('subcategory') or None
             p['subcategoryBSR'] = int(f(best['subcategory_rank'])) if best.get('subcategory_rank') else None
     apply_ntb(tab, acct, prods, ntb_rows)
+    if dyn:   # top-N blocks cover well under the account; one remainder row keeps the product table summing to the account
+        rest = blank_prod('All other ASINs')
+        for k in ('revenue', 'units', 'orders', 'sessions', 'adSpend', 'adSales', 'ntbOrders', 'ntbSales'):
+            rest[k] = max(0.0, acct[k] - sum(p[k] for p in prods))
+        if rest['revenue'] > 0 or rest['adSpend'] > 0:
+            prods.append(rest)
     prods = finish_products(prods)
     acct = finish_acct(acct)
     if acct['adSpend'] and not acct['adSales']:
         flags.append(f'{tab}: Helium10 reports spend but no attributed ad sales this week')
-    flags.append(f'{tab}: ad sales derived from Helium10 ACoS (spend / ACoS); SB/SD detail not available until the Ads API is connected')
+    if not ads_from_report:
+        flags.append(f'{tab}: ad sales derived from Helium10 ACoS (spend / ACoS), which misses most SB/SD sales; load the Reports Beta report to correct it')
     return {'acct': acct, 'products': prods, 'flags': flags, 'source': 'helium10'}, flags
 
 

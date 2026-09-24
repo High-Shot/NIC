@@ -2,7 +2,7 @@
 
 # WE 9/20/2026 (Sep 14 to Sep 20)
 
-Global: $448,643 USD-equivalent (-8.1% WoW), ad spend $40,323 (-9.1%), blended TACoS 9.0% (prior 9.1%). Cerakote Auto $410,296 (-10.6%); Legacy $27,872 (+32.2%, best week on record); Prismatic $10,475 (-9.0%). Headline: CC_UK collapsed -76.2% (£25,675 -> £6,114) on a UK Headlight Kit crash from 1,151 units to 51 (33% refund rate on the survivors) - looks like a stockout or listing suppression, and accounts for essentially the entire global decline; ex-UK Cerakote Auto was roughly flat. EU ACoS still hot (DE 53.4%, IT 51.9%, ES 35.9%, FR 30.7%); PP_US ACoS 69.7%. Prior week refreshed for settled attribution (CC_US ad sales +3.4%, revenue -0.4%). NTB loaded 9/24 (CC_US 440 orders, 2.4% of units).
+Global: $448,643 USD-equivalent (-8.1% WoW), ad spend $40,323 (-9.1%), blended TACoS 9.0% (prior 9.1%). Cerakote Auto $410,296 (-10.6%); Legacy $27,872 (+32.2%, best week on record); Prismatic $10,475 (-9.0%). Headline: CC_UK collapsed -76.2% (£25,675 -> £6,114) on a UK Headlight Kit crash from 1,151 units to 51 (33% refund rate on the survivors) - looks like a stockout or listing suppression, and accounts for essentially the entire global decline; ex-UK Cerakote Auto was roughly flat. EU ACoS still hot (DE 53.4%, IT 51.9%, ES 35.9%, FR 30.7%). Prior week refreshed for settled attribution (CC_US ad sales +3.4%, revenue -0.4%). NTB loaded 9/24 (CC_US 440 orders, 2.4% of units).
 
 Full note: WE_2026-09-20.md
 

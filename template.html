@@ -372,6 +372,11 @@ function getCmpWeek(w){
   if(wIdx<WEEKS.length-1)return WEEKS[wIdx+1];
   return null;
 }
+function chgLabel(){ // column header for the change column: WoW only when the comparison really is the prior week
+  if(viewMode!=='WEEKLY')return 'MoM';
+  const cmpSel=document.getElementById('weekCompare');
+  return (!cmpSel||cmpSel.value==='prev')?'WoW':'Change';
+}
 function cmpLabelStr(w){
   if(w._prev)return (w.range||'').replace(/^vs\s*/,'');
   const cmpSel=document.getElementById('weekCompare');
@@ -407,12 +412,19 @@ function usWeekNum(d){
   week1Start.setUTCDate(jan1.getUTCDate()-jan1.getUTCDay());
   return Math.floor((d-week1Start)/86400000/7)+1;
 }
+function isoWeekNum(d){ // ISO 8601 week number (weeks start Monday, week 1 holds the first Thursday)
+  const t=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()));
+  const day=(t.getUTCDay()+6)%7;t.setUTCDate(t.getUTCDate()-day+3);
+  const firstThu=new Date(Date.UTC(t.getUTCFullYear(),0,4));
+  return 1+Math.round(((t-firstThu)/86400000-3+((firstThu.getUTCDay()+6)%7))/7);
+}
 function weekLabelFor(w){
   const m=(w.fullLabel||'').match(/([A-Za-z]+)\s+(\d+),\s+(\d{4})/);
   if(!m) return w.label+' ('+w.range+')';
   const months={January:0,February:1,March:2,April:3,May:4,June:5,July:6,August:7,September:8,October:9,November:10,December:11};
   const weSun=new Date(Date.UTC(+m[3],months[m[1]],+m[2]));
-  return 'WEEK '+usWeekNum(weSun)+' ('+w.range+')';
+  const mon=new Date(weSun);mon.setUTCDate(weSun.getUTCDate()-6);
+  return 'WEEK '+isoWeekNum(mon)+' ('+w.range+')';
 }
 function renderWeekSelector(){
   const sel=document.getElementById('weekSelect');
@@ -471,7 +483,7 @@ function renderGlobalView(){
   const totalRev=mks.reduce((s,k)=>s+toUSD(k,w.markets[k]?.acct.revenue||0),0);
 
   const cmpW=getCmpWeek(w); const cs=cmpLabelStr(w);
-  let html=`<div class="sec">Marketplace Breakdown</div><div class="tbl-wrap"><table class="dt"><thead><tr><th>Market</th><th>Rev ${cs}</th><th>Rev ${w.label}</th><th>WoW</th><th>Units</th><th>Sessions</th><th>CVR</th><th>Ad Spend</th><th>Ad Sales</th><th>Organic</th><th>TACoS</th><th>ACoS</th><th>NTB</th><th>NTB%</th></tr></thead><tbody>`;
+  let html=`<div class="sec">Marketplace Breakdown</div><div class="tbl-wrap"><table class="dt"><thead><tr><th>Market</th><th>Rev ${cs}</th><th>Rev ${w.label}</th><th>${chgLabel()}</th><th>Units</th><th>Sessions</th><th>CVR</th><th>Ad Spend</th><th>Ad Sales</th><th>Organic</th><th>TACoS</th><th>ACoS</th><th>NTB</th><th>NTB%</th></tr></thead><tbody>`;
   mks.forEach(k=>{
     const a=w.markets[k]?.acct||{};const cur=getCur(k);
     const pa=cmpW?getMktData(cmpW,k).acct:null;
@@ -518,7 +530,7 @@ function renderMktView(){
     const cmpW=getCmpWeek(w); let pm={};
     if(cmpW){(getMktData(cmpW,mktKey).products||[]).forEach(pp=>pm[pp.name]=pp);}
     const cs=cmpLabelStr(w);
-    html+=`<div class="sec">Product Performance</div><div class="tbl-wrap"><table class="dt"><thead><tr><th>Product</th><th>Rev ${cs}</th><th>Rev ${w.label}</th><th>WoW</th><th>Units</th><th>Sessions</th><th>CVR</th><th>Ad Spend</th><th>Ad Sales</th><th>Organic</th><th>TACoS</th><th>ACoS</th><th>NTB</th><th>Cat BSR</th></tr></thead><tbody>`;
+    html+=`<div class="sec">Product Performance</div><div class="tbl-wrap"><table class="dt"><thead><tr><th>Product</th><th>Rev ${cs}</th><th>Rev ${w.label}</th><th>${chgLabel()}</th><th>Units</th><th>Sessions</th><th>CVR</th><th>Ad Spend</th><th>Ad Sales</th><th>Organic</th><th>TACoS</th><th>ACoS</th><th>NTB</th><th>Cat BSR</th></tr></thead><tbody>`;
     prods.forEach(p=>{
       const pp=pm[p.name];
       const ts=(p.acos>30||p.tacos>15)?'crit':p.tacos>10?'warn':'ok';

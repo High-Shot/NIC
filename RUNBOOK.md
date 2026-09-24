@@ -67,6 +67,7 @@ python3 scripts/tools/fetch_ntb_report.py <scratch html file> inbox
 ```
 It prints the saved CSV path. If no email is found or the download fails, also use any file Barcus dropped in `inbox/` by hand.
 3b. For each file in `inbox/`: `python3 scripts/ingest_ntb.py $WEEK inbox/<file>` and again for the prior WEEK (the 30-day window covers both), then move the file to `inbox/processed/`. Commit `inbox/processed/` with the rest.
+The ingest also writes `ads.csv` (spend and ad sales per tab and product, all campaign types). normalize.py uses it for the Helium10 tabs (CL_US, PP_US, CC_SA) instead of Helium10's ACoS-derived ad sales, which miss most SB/SD sales.
 3c. Check `data/raw/$WEEK/ntb_spend_check.csv` against the Scale Insights and Helium10 spend totals: they match to the cent when the export is complete; normalize.py flags any tab under 95% coverage.
 No report at all: continue, the week is flagged "NTB not loaded", and say so at the TOP of the summary to Barcus (the dashboard shows 0 NTB until it is loaded).
 
