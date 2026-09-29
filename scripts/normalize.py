@@ -11,6 +11,8 @@ Reads  data/raw/WE_<YYYY-MM-DD>/
 Writes data/weeks/WE_<date>.json in the shape the dashboard template reads.
 
 Usage:  python3 scripts/normalize.py WE_2026-09-06
+        python3 scripts/normalize.py --period 2026-09-01 2026-09-27   (exact date range, same raw files in
+            data/raw/P_<start>_<end>/, written to data/periods/<YYYY-MM>.json for the dashboard's Month view)
         python3 scripts/normalize.py --backfill sheet_dump.json   (one-time import of the old Google Sheet)
 """
 import csv, json, os, sys, re, datetime as dt
@@ -303,12 +305,23 @@ def build_h10(tab, week_dir, ntb_rows):
 
 
 # ---------------------------------------------------------------- driver
-def build_week(week_key):
-    we = dt.date.fromisoformat(week_key.replace('WE_', ''))
-    week_dir = os.path.join(ROOT, 'data', 'raw', week_key)
+def build_week(week_key, period=None):
+    if period:
+        start, we = period
+        week_dir = os.path.join(ROOT, 'data', 'raw', f'P_{start}_{we}')
+    else:
+        we = dt.date.fromisoformat(week_key.replace('WE_', ''))
+        week_dir = os.path.join(ROOT, 'data', 'raw', week_key)
     ntb_rows = read_csv(os.path.join(week_dir, 'ntb.csv'))
     ntb_spend = {r['tab']: f(r['report_spend_in_week']) for r in read_csv(os.path.join(week_dir, 'ntb_spend_check.csv'))}
-    out = week_meta(we)
+    if period:
+        import calendar
+        last = calendar.monthrange(start.year, start.month)[1]
+        out = {'month': f'{start:%Y-%m}', 'start': start.isoformat(), 'end': we.isoformat(), 'days': (we - start).days + 1,
+               'complete': start.day == 1 and we.day == last and we.month == start.month,
+               'label': f"{start:%b} {start.day}-{we.day}", 'fullLabel': f"{start:%B} {start.day} - {we:%B} {we.day}, {we.year}"}
+    else:
+        out = week_meta(we)
     out['generated_at'] = dt.datetime.now(dt.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
     out['markets'] = {}
     out['missing'] = []
@@ -320,7 +333,7 @@ def build_week(week_key):
             continue
         apply_pageviews(tab, m['acct'], m['products'], week_dir)
         if not ntb_rows:
-            m['flags'].append('NTB not loaded for this week (drop the Reports Beta master report in inbox/)')
+            m['flags'].append('NTB not loaded for this ' + ('period' if period else 'week') + ' (drop the Reports Beta master report in inbox/)')
         elif tab not in ntb_spend:
             m['flags'].append('NTB report has no rows for this market: NTB shown as 0')
         elif m['acct']['adSpend'] and ntb_spend[tab] / m['acct']['adSpend'] < 0.95:
@@ -397,6 +410,17 @@ def backfill(dump_path):
 def main():
     if len(sys.argv) < 2:
         print(__doc__); sys.exit(1)
+    if sys.argv[1] == '--period':
+        start, end = dt.date.fromisoformat(sys.argv[2]), dt.date.fromisoformat(sys.argv[3])
+        if (start.year, start.month) != (end.year, end.month):
+            sys.exit('a period must sit inside one calendar month')
+        out = build_week(None, (start, end))
+        os.makedirs(os.path.join(ROOT, 'data', 'periods'), exist_ok=True)
+        path = os.path.join(ROOT, 'data', 'periods', out['month'] + '.json')
+        with open(path, 'w') as fh:
+            json.dump(out, fh, indent=1, ensure_ascii=False)
+        print(f"{out['fullLabel']} -> {path}  markets: {len(out['markets'])}  missing: {out['missing'] or 'none'}")
+        return
     if sys.argv[1] == '--backfill':
         paths = backfill(sys.argv[2])
         print(f'backfilled {len(paths)} weeks')

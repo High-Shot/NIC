@@ -117,9 +117,14 @@ def route(campaign, account, marketplace, asin=''):
 def main():
     if len(sys.argv) < 3:
         print(__doc__); sys.exit(1)
-    week = sys.argv[1]
-    we = dt.date.fromisoformat(week.replace('WE_', ''))
-    mon = we - dt.timedelta(days=6)
+    if sys.argv[1] == '--period':   # exact date range, e.g. month to date: --period 2026-09-01 2026-09-27 file...
+        mon, we = dt.date.fromisoformat(sys.argv[2]), dt.date.fromisoformat(sys.argv[3])
+        week = f'P_{mon}_{we}'
+        del sys.argv[1:4]; sys.argv.insert(1, week)
+    else:
+        week = sys.argv[1]
+        we = dt.date.fromisoformat(week.replace('WE_', ''))
+        mon = we - dt.timedelta(days=6)
     out_dir = os.path.join(ROOT, 'data', 'raw', week)
     os.makedirs(out_dir, exist_ok=True)
     totals = defaultdict(lambda: [0.0, 0.0])       # (tab, product|_TOTAL_) -> [orders, sales]
@@ -184,8 +189,8 @@ def main():
             w = csv.writer(fh); w.writerow(['campaign', 'account_or_tab', 'ntb_orders', 'ntb_sales']); w.writerows(unmatched)
     days = sorted(seen_dates)
     print(f"{week}: {len(days)} days in window ({days[0] if days else '-'} to {days[-1] if days else '-'}), tabs {sorted({t for t, _ in totals})}, campaigns with NTB but no product: {len(unmatched)} (see ntb_unmatched.csv; their NTB is in the tab total)")
-    if days and len(days) < 7:
-        print('WARNING: fewer than 7 days inside the week. Check the report period.')
+    if days and len(days) < (we - mon).days + 1:
+        print('WARNING: the report does not cover every day of the window. Check the report period.')
 
 
 if __name__ == '__main__':
