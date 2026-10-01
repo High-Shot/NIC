@@ -2,7 +2,7 @@
 
 # WE 9/27/2026 (Sep 21 to Sep 27)
 
-Global: $443,344 USD-equivalent (-0.7% WoW), ad spend $38,296 (-4.9%), blended TACoS 8.6% (prior 9.0%). Cerakote Auto $411,329 (+0.8%); Legacy $21,596 (-22.5%, off last week's record back to run-rate); Prismatic $10,419 (-0.5%). NTB NOT LOADED — the 9/23 Reports Beta link expired 9/25 and nothing was in inbox/; dashboard shows 0 NTB and CL_US/PP_US/CC_SA ad sales fall back to Helium10 ACoS (understated, so their ACoS is overstated). Manual Monday run: CC_US sessions -15% WoW (revenue and units flat), provisional until the Thursday run re-pulls with NTB. EU paid still hot (FR ACoS 45.9%/TACoS 15.5%, DE 37.4%/24.9%, IT 34.4%/17.5%). Prior week (WE 9/20) refreshed: revenue within 1% except CC_NL -2.8%.
+Global: $441,801 USD-equivalent (-0.9% WoW), ad spend $38,538 (-4.2%), blended TACoS 8.7% (prior 9.0%). Cerakote Auto $409,835 (+0.6%); Legacy $21,546 (-22.7%, off last week's record back to run-rate); Prismatic $10,419 (-0.5%). Thursday re-run with NTB now loaded (529 NTB orders, $11,673 NTB sales; report covers ~100% of spend on every tab). CC_US flat and healthy: $341,079, sessions 87,634 (recovered from Monday's provisional -15% read), TACoS 8.6%, units +0.1% WoW. EU paid still hot (FR ACoS 42.2%/TACoS 15.6%, DE 35.4%/25.2%, IT 33.4%/17.6%; Tire Coat the common drag). CC_UK Headlight Kit still depressed (£144, 8 units, 75% refund rate) — the 9/20 crash has not recovered. Prior week (WE 9/20) refreshed; within ~1%.
 
 Full note: WE_2026-09-27.md
 

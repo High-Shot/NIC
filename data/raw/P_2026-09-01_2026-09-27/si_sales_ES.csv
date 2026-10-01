@@ -1,12 +1,12 @@
 market,asin,sku,title,sales,units,orders,ppc_cost,ppc_sales,sessions
-ES,_TOTAL_,,,13725.04,654,649,1711.14,5032.53,8098
-ES,B084RQKLV8,AH-HLKITA,CERAKOTE Kit de Limpieza de Faros y Restauración de Cerámica para Faros Delanter,9204.0,420,418,892.86,3001.71,3720
-ES,B07SHJVK4G,AH-TRKITA,CERAKOTE Kit de Revestimiento de cerámica – Restaurador rápido de molduras de pl,1553.4,78,78,131.16,866.5,1052
-ES,B0B94G13CN,AH-RCPAINTA,CERAKOTE® Rapid Ceramic Paint Sealant - sellador cerámico profesional para pintu,1495.17,65,63,513.1,963.11,1938
-ES,B0F45C2YHV,AH-RCTIRE10A,CERAKOTE Rapid Ceramic Tire Coat – Pulido de neumáticos de cerámica de secado rá,825.14,49,49,172.97,201.21,614
-ES,B0FYRJ1966,AH-RCPL-B14A,Cerakote Rapid Ceramic Plastic Restorer and Protectant - Clasificación de 50 lav,356.6,20,19,0,0,290
-ES,B0CQN1RXYB,AH-GLASSCOATA,CERAKOTE® Recubrimiento de Vidrio Cerámico Protector - Repelente de Lluvia Hidró,168.77,13,13,1.05,0.0,349
-ES,B0DKVZRX69,AH-RCINT14A,"CERAKOTE® Rapid Ceramic - Aerosol para detalles de interiores, 414 ml",52.01,4,4,0,0,78
-ES,B0DJMW6283,AH-MICRTOWEL12A,"CERAKOTE Toallas de microfibra para limpieza y aplicación (paquete de 12), mater",36.05,3,3,0,0,18
-ES,B0FW6WFX4D,AH-RCWHL14A,"CERAKOTE Sellador rápido de ruedas de cerámica, revestimiento de pulverización d",17.95,1,1,0,0,18
-ES,B0DVB4P9KQ,AH-VEHSHAM16A,"CERAKOTE® Champú de alta espuma para vehículos, jabón de lavado de coche pH",15.95,1,1,0,0,21
+ES,_TOTAL_,,,13725.04,654,649,1711.14,5136.92,8443
+ES,B084RQKLV8,,,9204.0,420,418,892.86,3078.08,3908
+ES,B07SHJVK4G,,,1553.4,78,78,131.16,866.5,1115
+ES,B0B94G13CN,,,1495.17,65,63,513.1,991.13,1982
+ES,B0F45C2YHV,,,825.14,49,49,172.97,201.21,629
+ES,B0FYRJ1966,,,356.6,20,19,0,0,308
+ES,B0CQN1RXYB,,,168.77,13,13,1.05,0,366
+ES,B0DKVZRX69,,,52.01,4,4,0,0,78
+ES,B0DJMW6283,,,36.05,3,3,0,0,18
+ES,B0FW6WFX4D,,,17.95,1,1,0,0,18
+ES,B0DVB4P9KQ,,,15.95,1,1,0,0,21
